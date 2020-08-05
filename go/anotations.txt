@@ -1,0 +1,11 @@
+adonis migration:run
+
+adonis make:controller User
+
+adonis route:list
+
+
+$ adonis serve --dev
+
+// desfazer migrations
+adonis migration:rollback
