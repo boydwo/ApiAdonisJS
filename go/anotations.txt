@@ -10,3 +10,6 @@ $ adonis serve --dev
 // desfazer migrations
 adonis migration:rollback
 adonis install @adonisJS/mail
+
+
+adonis make:model File -m -c
