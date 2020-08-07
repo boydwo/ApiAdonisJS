@@ -15,6 +15,8 @@ Route.group(()=> {
   Route.get('/files/:id', 'FileController.show')
 
   Route.resource('projects', 'ProjectController').apiOnly()
+  Route.resource('projects.tasks', 'TaskController').apiOnly()
+
 }).middleware(['auth'])
 
 
