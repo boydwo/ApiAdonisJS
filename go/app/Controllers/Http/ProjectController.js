@@ -5,7 +5,7 @@ const Project = use('App/Models/Project')
 class ProjectController {
 
   async index ({ request, response, view }) {
-    const projects = await Project.all()
+    const projects = await Project.query().with('user').fetch()
 
     return projects
   }
@@ -19,12 +19,29 @@ class ProjectController {
   }
 
   async show ({ params, request, response, view }) {
+    const project = await Project.findOrFail(params.id)
+
+    await project.load('user')
+    await project.load('tasks')
+
+    return project
   }
 
-  async update ({ params, request, response }) {
+  async update ({ params, request }) {
+    const project = await Project.findOrFail(params.id)
+    const data = request.only(['title', 'description'])
+
+    project.merge(data)
+
+    await project.save()
+
+    return project
   }
 
   async destroy ({ params, request, response }) {
+    const project = await Project.findOrFail(params.id)
+
+    await project.delete()
   }
 }
 
