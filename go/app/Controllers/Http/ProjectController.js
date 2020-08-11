@@ -1,21 +1,48 @@
 'use strict'
 
+const Bank = use('App/Models/Bank')
+const Adress = use('App/Models/Address')
+const PetShop = use('App/Models/PetShop')
 const Project = use('App/Models/Project')
 
 class ProjectController {
 
   async index ({ request, response, view }) {
-    const projects = await Project.query().with('user').fetch()
+    // const projects = await Project.query().with('user').fetch()
+    const petshops = await PetShop
+    .query()
+    .with('banks')
+    .with('user')
+    .with('address')
+    .with('files')
+    .fetch()
 
-    return projects
+  // const media = await Database.from('ratings').avg('note as media')
+
+  return response.send({ petshops })
   }
 
   async store ({ request, response, auth }) {
-    const data = request.only(['title', 'description'])
 
-    const project = await Project.create({...data, user_id: auth.user.id})
+  const {address, bank, petshop} = request.all()
 
-    return project
+
+   const createRegisterAdress = await Adress.create({...address})
+
+  const address_id = createRegisterAdress.id
+
+  const credateRegisterPetShop = await PetShop.create({...petshop, address_id, status: "active"})
+
+  const createRegisterBank = await Bank.create({...bank,  petshop_id: credateRegisterPetShop.id})
+
+  return response.send([createRegisterBank,  createRegisterAdress, credateRegisterPetShop])
+
+
+    // const data = request.only(['title', 'description'])
+
+    // const project = await Project.create({...data, user_id: auth.user.id})
+
+    // return project
   }
 
   async show ({ params, request, response, view }) {
