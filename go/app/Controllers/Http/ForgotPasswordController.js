@@ -39,7 +39,7 @@ class ForgotPasswordController {
 
       const user = await User.findByOrFail('token', token)
 
-      const tokenExpired = moment().subtract('2','days').isAfter(user.token_created_at)
+      const tokenExpired = moment().subtract('2','days').isAfter(user.token_created_at);
 
       if(tokenExpired){
         return response.status(401).send({ error: {message: 'O Token de recuperação estpa expirado'}})
