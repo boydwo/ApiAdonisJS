@@ -13,3 +13,11 @@ adonis install @adonisJS/mail
 
 
 adonis make:model File -m -c
+
+
+petshop_photos
+	
+	id petshop_id user_id type_photo .......
+				capa
+				logo
+				

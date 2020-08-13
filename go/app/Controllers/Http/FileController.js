@@ -24,7 +24,7 @@ class FileController {
       })
 
       if(!upload.moved()){
-        throw upload.error()
+        return response.status(400).send({error: { message: 'Erro no upload de arquivos'}})
       }
 
       const file = await File.create({
