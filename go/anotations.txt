@@ -12,12 +12,12 @@ adonis migration:rollback
 adonis install @adonisJS/mail
 
 
+adonis migration:refresh
+
 adonis make:model File -m -c
 
+insert into purchases_services(id, purchase_request_id, services_id) values (1, 1, 1);
 
-petshop_photos
-	
-	id petshop_id user_id type_photo .......
-				capa
-				logo
-				
+insert into purchases_products(id, purchase_request_id, products_id) values (1, 1, 1)
+
+insert into purchase_requests(id, pet_shop_id, user_id, value_order, discount_coupon, discount_value, installment, purchase_date, send_date) values (2, 2, 1, 79, 'responsive', 1, 1, '2019-12-02 17:37:03', '2019-11-28 16:25:25');
