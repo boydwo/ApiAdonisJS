@@ -14,6 +14,7 @@ class PetshopSchema extends Schema {
       .inTable('addresses')
       .onUpdate('CASCADE')
       .onDelete('SET NULL')
+    table.string('teste_name').notNullable()
     table.string('trade_name').notNullable()
     table.string('register_name').notNullable()
     table.string('document').notNullable()
